@@ -1,0 +1,75 @@
+{% extends 'header.html' %}
+{% block content %}
+	<div class="alert alert-dismissible fade show" style={{ welcmeclr|safe }} role="alert">
+  		<strong>Welcome to {{ appName }}</strong>  <i>an infix expression is what humans used to solve normally. But machine uses a stack to solve such expression. for know why need this conversion <a href="https://www.quora.com/What-is-the-need-to-convert-an-infix-expression-to-a-postfix-expression" target="_blank" style="color:#FFF000;">here</a></i>
+  		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    		<span aria-hidden="true">&times;</span>
+  		</button>
+	</div>
+	<main>
+		<h3 class="container mt-4"><i>{{ appName }}</i></h3>
+		<div class="container mt-3">
+			<div class="row mt-3">
+				<div class="col-md-2"></div>
+				<div class="col-md-8 navbar-text">
+					<form action=""  method="post" enctype="multipart/form-data"> {% csrf_token %}
+						<div class="form-group">
+							<label for="exampleFormControlFile1">Enter Your Infix Expression</label>
+							<div class="input-group input-group-sm mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="inputGroup-sizing-sm">Infix</span>
+								</div>
+								<input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" name="infiexpression" placeholder="Expression Only" required>
+							</div>
+						</div>
+								
+					<!-- for Small Note  -->
+						<div class="alert alert-warning alert-dismissible fade show"  role="alert">
+							<strong>Note:</strong>  <i> Allow expression litrals is <i>" a-z,(,),^,+,-,*,/ "</i> only. 
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+					<!-- Small Note End -->
+								
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="postfix" checked>
+							<label class="form-check-label" for="exampleRadios1">Postfix Conversion</label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="prefix">
+							<label class="form-check-label" for="exampleRadios2">Prefix Conversion</label>
+						</div>
+												
+						<div class = "form-group mt-2">
+							<button type="submit" class="btn btn-primary mt-2 mb-2">Confirm Expression</button>
+						</div>
+						
+					</form>
+					
+				</div>
+				
+				<div class="col-md-2"></div>
+			
+			</div>
+			<div class="row mt-4">
+				<div class="col-md-11 navbar-text">
+							
+						{% if answers %}
+						<h4>Results:</h4>
+						<div class="container ml-4"><i>{{ answers|safe }}</i>></div>
+						{% endif %}
+						
+						{% if error %}
+						<div class="alert alert-danger fade show" role="alert">
+							<strong>Welcome to {{ appName }} we got an error is:</strong>  <i> {{ error }}. </i> We Recommend to check your expression once.
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						{% endif %}
+						</div>
+			</div>
+		</div>
+	</main>
+{% endblock %}
